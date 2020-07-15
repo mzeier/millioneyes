@@ -1,0 +1,40 @@
+---
+- block:
+
+  - name: make the postboot dir for logging
+    file:
+      path: /mnt/logs/
+      state: directory
+      owner: ubuntu
+      group: ubuntu
+
+  - name: copy proxy configuration to {{ wavefront_config_dir }}/wavefront-proxy/wavefront.conf
+    template:
+      dest: "{{ wavefront_config_dir }}/wavefront.conf"
+      src: "wavefront-proxy.conf.j2"
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart wavefront-proxy
+
+  - name: copy preprocessor_rules.yaml to {{ wavefront_config_dir }}/wavefront-proxy/preprocessor_rules.yaml
+    template:
+      dest: "{{ wavefront_config_dir }}/preprocessor_rules.yaml"
+      src: "preprocessor_rules.yaml.j2"
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart wavefront-proxy
+
+  - name: copy log4j2.xml to {{ wavefront_config_dir }}/wavefront-proxy/log4j2.xml
+    template:
+      dest: "{{ wavefront_config_dir }}/log4j2.xml"
+      src: "log4j2.xml.j2"
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart wavefront-proxy
+      
+  tags:
+    - wavefront-proxy
+    - wavefront-proxy-config

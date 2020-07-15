@@ -1,0 +1,26 @@
+---
+- block:
+
+  - name: set hostname
+    hostname: name="{{ inventory_hostname | regex_replace('\\[', '') | regex_replace('\\]', '')}}"
+
+  - name: set /etc/hosts
+    template: src="hosts.j2" dest="/etc/hosts" mode=0644 owner=root group=root
+
+  tags:
+   - base
+   - sethostname
+
+- block:
+
+  - name: update /etc/vim/vimrc (bg=dark)
+    lineinfile:
+      dest: "/etc/vim/vimrc"
+      line: "set bg=dark"
+      state: present
+    tags:
+     - vimrc
+
+  tags:
+   - base
+   - millioneyes

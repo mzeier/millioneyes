@@ -1,0 +1,16 @@
+# # Configuration for Wavefront proxy to send metrics to
+[[outputs.wavefront]]
+  prefix = "telegraf."
+  {% if use_http_protocol == True %}
+  url = "http://{{ proxy_address }}:2878"
+  {% else %}
+  host = "{{ proxy_address }}"
+  port = {{ proxy_port }}
+  {% endif %}
+  metric_separator = "."
+  source_override = ["hostname", "snmp_host", "node_host"]
+  convert_paths = true
+  use_regex = false
+  {% if telegraf_debug == "true" %}
+  debug_all = true
+  {% endif %}

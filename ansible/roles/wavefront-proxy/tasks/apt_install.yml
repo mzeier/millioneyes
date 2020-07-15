@@ -1,0 +1,24 @@
+---
+- block:
+
+  - name: apt dependencies
+    apt: name=apt-transport-https state=present
+
+  - name: Wavefront apt repository key
+    apt_key:
+      url: "{{ wavefront_repo_gpgkey }}"
+      state: present
+      validate_certs: no
+
+  - name: Wavefront Proxy repository
+    apt_repository:
+      repo: "deb {{ wavefront_proxy_repo_url }}/ubuntu/ {{ ansible_distribution_release }} main"
+      state: present
+      update_cache: yes
+
+  - name: install Wavefront Proxy
+    apt: name=wavefront-proxy state=latest
+
+  tags:
+    - wavefront-proxy-repo
+    - wavefront-proxy

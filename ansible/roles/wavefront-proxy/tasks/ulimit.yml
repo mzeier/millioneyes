@@ -1,0 +1,21 @@
+---
+#
+# This task defines ulimits.
+#
+
+- block:
+
+  - name: include vars file limits.yml
+    include_vars: limits.yml
+
+  - name: configure ulimits for users
+    pam_limits:
+      domain: '{{ item.domain }}'
+      limit_item: '{{ item.limit_item }}'
+      limit_type: '{{ item.limit_type }}'
+      value: '{{ item.value }}'
+    with_items: '{{ user_limits }}'
+
+  tags:
+   - wavefront-proxy
+   - wavefront-proxy-ulimits

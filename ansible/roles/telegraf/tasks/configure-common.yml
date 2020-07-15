@@ -1,0 +1,36 @@
+---
+
+- block:
+  - name: create telegraf script dir
+    file:
+      path: "{{ telegraf_script_dir }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+  - name: plumb default telegraf.conf
+    template: src="telegraf.conf.j2" dest="{{ telegraf_main_config }}" mode=0644
+    notify: restart telegraf
+    tags: configure-telegraf-common-telegraf
+
+  - name: plumb default wavefront output plugin
+    template: src="10-wavefront.conf.j2" dest="{{ telegraf_additional_config_dir }}/10-wavefront.conf" mode=0644
+    notify: restart telegraf
+
+  - name: telegraf custom scripts
+    template: src="scripts/{{ item }}.j2" dest="{{ telegraf_script_dir }}/{{ item }}" mode=0755
+    with_items:
+      - "netstat.sh"
+
+  - name: telegraf plugins
+    template: src="{{ item }}.j2" dest="{{ telegraf_additional_config_dir }}/{{ item }}" mode=0644
+    with_items:
+      - "input-exec-netstat.conf"
+    notify: restart telegraf
+    tags: configure-telegraf-common-plugins
+
+  tags:
+   - telegraf
+   - configure-telegraf
+   - configure-telegraf-common

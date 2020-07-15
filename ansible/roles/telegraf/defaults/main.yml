@@ -1,0 +1,32 @@
+---
+
+wavefront_telegraf_pkg_url: "https://packagecloud.io/wavefront/telegraf"
+
+telegraf_config_dir: "/etc/telegraf"
+telegraf_script_dir: "/opt/telegraf"
+telegraf_main_config: "{{ telegraf_config_dir }}/telegraf.conf"
+telegraf_additional_config_dir: "{{ telegraf_config_dir }}/telegraf.d"
+telegraf_port: 2878
+telegraf_debug: "false"
+
+zfs: false
+
+proxy_address: "wavefront-proxy.example.com"
+proxy_port: "{{ telegraf_port }}"
+
+# defaults to off
+emit_to_pwani: false
+pwani_proxy_address: "secondary-proxy.example.com"
+pwani_proxy_port: "{{ proxy_port }}"
+
+telegraf_tags:
+   - { name: 'status', value: 'production' }
+
+telegraf_procstat:
+
+telegraf_http_listener_port: 8186
+telegraf_udp_listener_port: 8092
+
+telegraf_http_listener: True
+telegraf_udp_listener: True
+use_http_protocol : False

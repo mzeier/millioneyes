@@ -1,0 +1,35 @@
+---
+
+- hosts: tag_role_millioneyes
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - block:
+      - name: grab ec2_metadata_facts
+        ec2_metadata_facts:
+      tags:
+        - always
+
+  vars:
+    - role: millioneyes
+    - proxy_address: localhost
+    - ansible_distribution_version: "18.04"
+    - ansible_distribution_release: "bionic"
+    - ec2_tag_role: "{{ role }}"
+    - ec2_tag_cluster: "ops"
+    - telegraf_tags:
+        - { name: 'status', value: 'production' }
+#        - { name: 'region', value: '{{ region }}'}
+    - http_hosts:
+      - { url: "https://api.lacework.net/ui", service: "api" }
+      - { url: "https://api.lacework.net/reports/events", service: "api" }
+      - { url: "https://api.lacework.net/upgrade", service: "api" }
+      - { url: "https://api.lacework.net/mgr", service: "api" }
+      - { url: "https://www.lacework.net", service: "frontdoor" }
+      - { url: "https://www.lacework.com", service: "frontdoor" }
+
+  roles:
+    - millioneyes
+    - wavefront-proxy
+    - telegraf
