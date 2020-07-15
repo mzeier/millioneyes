@@ -1,0 +1,7 @@
+---
+# Setup tasks
+
+
+- include: apt_install.yml
+- include: ulimit.yml
+- include: configure.yml

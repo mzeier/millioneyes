@@ -1,0 +1,5 @@
+---
+
+
+- name: restart wavefront-proxy
+  service: name=wavefront-proxy state=restarted enabled=yes

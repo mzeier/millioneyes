@@ -1,0 +1,9 @@
+---
+
+- include: packages.yml
+
+- include: configure-common.yml
+
+- include: configure-millioneyes.yml
+  when: ec2_tag_role == "millioneyes"
+

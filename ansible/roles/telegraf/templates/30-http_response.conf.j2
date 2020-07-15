@@ -1,0 +1,10 @@
+{% for host in http_hosts %}
+[[inputs.http_response]]
+  urls = ["{{ host.url }}"]
+  response_timeout = "5s"
+  method = "GET"
+  name_override = "millioneyes"
+  [inputs.http_response.tags]
+  service = "{{ host.service }}"
+  
+{% endfor %}

@@ -1,0 +1,9 @@
+#
+# defines /etc/security/limits.d/ user settings
+#
+---
+user_limits:
+  - { domain: "root", limit_item: "nofile", limit_type: "soft", value: 65000 }
+  - { domain: "root", limit_item: "nofile", limit_type: "hard", value: 65000 }
+  - { domain: "*", limit_item: "nofile", limit_type: "hard", value: 65000 }
+  - { domain: "*", limit_item: "nofile", limit_type: "soft", value: 65000 }

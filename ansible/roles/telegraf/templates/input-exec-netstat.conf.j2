@@ -1,0 +1,7 @@
+[[inputs.exec]]
+  commands = ["{{ telegraf_script_dir }}/netstat.sh"]
+  data_format = "influx"
+  timeout = "5s"
+
+  ## measurement name suffix (for separating different commands)
+  #name_suffix = ".netstat"

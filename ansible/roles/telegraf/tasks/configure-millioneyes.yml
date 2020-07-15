@@ -1,0 +1,12 @@
+---
+
+- block:
+
+  - name: telegraf http_response input config (millioneyes)
+    template: src="30-http_response.conf.j2" dest="/etc/telegraf/telegraf.d/30-http_response.conf" mode=0644
+    notify: restart telegraf
+
+  tags:
+   - telegraf
+   - configure-telegraf
+   - configure-telegraf-millioneyes

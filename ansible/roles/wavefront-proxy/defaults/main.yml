@@ -1,0 +1,41 @@
+---
+wavefront_api_token: "EMPTY"
+wavefront_api_url: "https://metrics.wavefront.com/api"
+
+# repository defaults
+wavefront_proxy_repo_url: "https://packagecloud.io/wavefront/proxy"
+wavefront_repo_gpgkey: "https://packagecloud.io/wavefront/proxy/gpgkey"
+wavefront_rpm_repo_url: "https://packagecloud.io/wavefront/proxy/el"
+
+wavefront_config_dir: '/etc/wavefront/wavefront-proxy'
+wavefront_config: "{{ wavefront_config_dir }}/tsconfig.json"
+
+# proxy settings
+wavefront_proxy_port: "2878"
+wavefront_proxy_opentsdb_ports: "4242"
+wavefront_proxy_json_ports: ~
+wavefront_proxy_writeHttpJson_ports: ~
+wavefront_proxy_histogram_enabled: false
+
+#
+# Histogram settings
+#
+# - minute aggregation:
+histogramMinsListenerPorts: 40001
+histogramMinuteAccumulators: 2
+histogramMinuteFlushSecs: 70
+
+# - hour aggregation:
+histogramHoursListenerPorts: 40002
+histogramHourAccumulators: 2
+histogramHourFlushSecs: 4200
+
+# - day aggregation:
+histogramDaysListenerPorts: 40003
+histogramDayAccumulators: 2
+histogramDayFlushSecs: 18000
+
+# - distribution format:
+histogramDistListenerPorts: 40000
+histogramDistAccumulators: 2
+histogramDistFlushSecs: 70
