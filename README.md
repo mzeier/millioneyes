@@ -10,6 +10,8 @@ Using any number of Amazon regions, we launch the smallest instance we can and r
 
 Telegraf can report to a number of end points. The example code reports to [Wavefront](https://www.wavefront.com/) (largely because I worked there when I first hacked on this).
 
+* [Slide Presenation](https://drive.google.com/file/d/1YCu146le_m7j2Mn9QDt1j-BMQ6YjiEIA/view?usp=sharing)
+
 ## The code
 
 * `terraform`: sample code that launches a single instance in an arbitary number of regions.
