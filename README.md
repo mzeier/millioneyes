@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This was essentially a science projectto see if I could duplicate what commercial services do an mimic a "million eyes" of offsite website checks.
+This was essentially a science project to see if I could duplicate what commercial services do an mimic a "million eyes" of offsite website checks.
 
 Using any number of Amazon regions, we launch the smallest instance we can and run [telegraf](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http).
 
